@@ -26,4 +26,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public List<EmployeeEntity> getEmployeeList() {
         return dao.findAll();
     }
+
+    @Override
+    public void delete(long id) {
+        dao.deleteById(id);
+    }
 }

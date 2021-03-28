@@ -9,4 +9,6 @@ public interface EmployeeRepository {
     void save(EmployeeEntity role);
 
     List<EmployeeEntity> getEmployeeList();
+
+    void delete(long id);
 }

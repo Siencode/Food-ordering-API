@@ -11,4 +11,5 @@ public interface ProductRepository {
 
     void save(ProductEntity productEntity);
 
+    void delete(long id);
 }

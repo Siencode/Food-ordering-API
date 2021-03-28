@@ -39,4 +39,14 @@ public class ProductController {
     public void saveGroup(@RequestBody ProductGroupEntity groupEntity) {
         productService.saveGroup(groupEntity);
     }
+
+    @DeleteMapping("/product/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+    }
+
+    @DeleteMapping("/group/{id}")
+    public void deleteGroup(@PathVariable Long id) {
+        productService.deleteGroupById(id);
+    }
 }

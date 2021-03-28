@@ -40,4 +40,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void saveRole(EmployeeRoleEntity roleEntity) {
         employeeRoleRepository.save(roleEntity);
     }
+
+    @Override
+    public void deleteEmployeeById(long id) {
+        employeeRepository.delete(id);
+    }
+
+    @Override
+    public void deleteRoleById(long id) {
+        employeeRoleRepository.delete(id);
+    }
 }

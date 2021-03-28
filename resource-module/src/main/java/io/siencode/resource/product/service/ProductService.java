@@ -14,4 +14,9 @@ public interface ProductService {
     void saveProduct(ProductEntity productEntity);
 
     void saveGroup(ProductGroupEntity groupEntity);
+
+    void deleteProductById(long id);
+
+    void deleteGroupById(long id);
+
 }

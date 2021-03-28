@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class EmployeeRoleEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
 }

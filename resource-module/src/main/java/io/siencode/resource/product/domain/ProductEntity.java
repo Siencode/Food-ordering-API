@@ -10,10 +10,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String productName;
     String price;
+    String description;
     @ManyToOne
     @JoinColumn(name = "PRODUCTGROUP_ID", referencedColumnName = "id")
     ProductGroupEntity group;

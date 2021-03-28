@@ -40,4 +40,13 @@ public class EmployeeController {
         employeeService.saveRole(employeeRoleEntity);
     }
 
+    @DeleteMapping("/employee/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployeeById(id);
+    }
+
+    @DeleteMapping("/role/{id}")
+    public void deleteRole(@PathVariable Long id) {
+        employeeService.deleteRoleById(id);
+    }
 }

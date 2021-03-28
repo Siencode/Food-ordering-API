@@ -26,4 +26,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     public void save(ProductEntity productEntity) {
         dao.save(productEntity);
     }
+
+    @Override
+    public void delete(long id) {
+        dao.deleteById(id);
+    }
 }

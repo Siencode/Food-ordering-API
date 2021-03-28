@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class EmployeeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String firstName;
     String surname;

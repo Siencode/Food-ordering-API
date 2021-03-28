@@ -26,4 +26,9 @@ public class EmployeeRoleRepositoryImpl implements EmployeeRoleRepository {
     public List<EmployeeRoleEntity> getRoleList() {
         return dao.findAll();
     }
+
+    @Override
+    public void delete(long id) {
+        dao.deleteById(id);
+    }
 }

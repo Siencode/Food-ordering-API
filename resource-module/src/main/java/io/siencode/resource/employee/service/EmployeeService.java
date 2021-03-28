@@ -15,4 +15,8 @@ public interface EmployeeService {
 
     void saveRole(EmployeeRoleEntity roleEntity);
 
+    void deleteEmployeeById(long id);
+
+    void deleteRoleById(long id);
+
 }

@@ -40,4 +40,14 @@ public class ProductServiceImpl implements ProductService {
     public void saveGroup(ProductGroupEntity productGroupEntity) {
         productGroupRepository.save(productGroupEntity);
     }
+
+    @Override
+    public void deleteProductById(long id) {
+        productRepository.delete(id);
+    }
+
+    @Override
+    public void deleteGroupById(long id) {
+        productGroupRepository.delete(id);
+    }
 }

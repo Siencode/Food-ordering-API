@@ -11,4 +11,5 @@ public interface ProductGroupRepository {
 
     void save(ProductGroupEntity productGroupEntity);
 
+    void delete(long id);
 }
