@@ -16,5 +16,5 @@ public class ProductEntity {
     String price;
     @ManyToOne
     @JoinColumn(name = "PRODUCTGROUP_ID", referencedColumnName = "id")
-    private ProductGroupEntity group;
+    ProductGroupEntity group;
 }
