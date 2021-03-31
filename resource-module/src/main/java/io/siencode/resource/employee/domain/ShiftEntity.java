@@ -13,9 +13,10 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeRoleEntity {
+public class ShiftEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
-    String name;
+    String range;
 }

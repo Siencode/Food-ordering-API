@@ -5,23 +5,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeEntity {
+public class ScheduleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
-    String firstName;
-    String surname;
-    String phoneNumber;
-    String login;
-    String password;
+    LocalDate date;
     @ManyToOne
-    @JoinColumn(name = "EMPLOYEEROLE_ID", referencedColumnName = "id")
-    EmployeeRoleEntity role;
-
-
+    @JoinColumn(name = "SHIFT_ID", referencedColumnName = "id")
+    ShiftEntity shiftEntity;
+    @ManyToOne
+    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id")
+    EmployeeEntity employeeEntity;
 }
