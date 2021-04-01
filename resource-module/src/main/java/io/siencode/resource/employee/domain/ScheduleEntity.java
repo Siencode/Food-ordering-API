@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Schedule")
 public class ScheduleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
