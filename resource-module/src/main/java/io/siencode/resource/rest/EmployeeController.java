@@ -6,7 +6,9 @@ import io.siencode.resource.employee.domain.ScheduleEntity;
 import io.siencode.resource.employee.domain.ShiftEntity;
 import io.siencode.resource.employee.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,12 +27,23 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public List<EmployeeEntity> getProduct() {
-        return employeeService.findAllEmployees();
+        List<EmployeeEntity> productList = employeeService.findAllEmployees();
+        if (productList == null || productList.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee added");
+        } else {
+            return productList;
+        }
     }
 
     @GetMapping("/role")
-    public List<EmployeeRoleEntity> getGroup() {
-        return employeeService.findAllRoles();
+    public List<EmployeeRoleEntity> getRole() {
+        List<EmployeeRoleEntity> roleList = employeeService.findAllRoles();
+
+        if (roleList == null || roleList.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No role added");
+        } else {
+            return roleList;
+        }
     }
 
     @PostMapping("/employee")
@@ -55,24 +68,46 @@ public class EmployeeController {
 
     @GetMapping("/schedule")
     public List<ScheduleEntity> getSchedule() {
-        return employeeService.findAllSchedules();
+        List<ScheduleEntity> getSchedule = employeeService.findAllSchedules();
+        if (getSchedule == null || getSchedule.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No schedule added");
+        } else {
+            return getSchedule;
+        }
     }
 
     @GetMapping("/shift")
     public List<ShiftEntity> getShift() {
-        return employeeService.findAllShifts();
+        List<ShiftEntity> getShift = employeeService.findAllShifts();
+        if (getShift == null || getShift.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No shift added");
+        } else {
+            return getShift;
+        }
     }
 
     @GetMapping("/schedule/{year}/{month}/{id}")
     public List<ScheduleEntity> getScheduleByMonth(@PathVariable int year, @PathVariable int month, @PathVariable Long id) {
         LocalDate localDate = LocalDate.of(year, month, 1);
-        return employeeService.findAllScheduleByMonth(localDate, id);
+        List<ScheduleEntity> getScheduleByMonth = employeeService.findAllScheduleByMonth(localDate, id);
+
+        if (getScheduleByMonth == null || getScheduleByMonth.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("No shift added. Year: %d Month: %d UserID: %d", year, month, id));
+        } else {
+            return getScheduleByMonth;
+        }
     }
 
     @GetMapping("/schedule/{year}/{month}")
     public List<ScheduleEntity> getScheduleByMonth(@PathVariable int year, @PathVariable int month) {
         LocalDate localDate = LocalDate.of(year, month, 1);
-        return employeeService.findAllScheduleByMonth(localDate, null);
+        List<ScheduleEntity> getScheduleByMonth = employeeService.findAllScheduleByMonth(localDate, null);
+
+        if (getScheduleByMonth == null || getScheduleByMonth.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("No shift added. Year: %d Month: %d", year, month));
+        } else {
+            return getScheduleByMonth;
+        }
     }
 
     @PostMapping("/schedule")
