@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductGroupEntity> findAllGroups() {
         return productGroupRepository.getGroupList();
+    }
+
+    @Override
+    public List<ProductEntity> findAllProductsByGroupId(long id) {
+        return productRepository.getProductList().stream().filter(productEntity -> productEntity.getGroup().getId() == id).collect(Collectors.toList());
     }
 
     @Override

@@ -11,6 +11,8 @@ public interface ProductService {
 
     List<ProductGroupEntity> findAllGroups();
 
+    List<ProductEntity> findAllProductsByGroupId(long id);
+
     void saveProduct(ProductEntity productEntity);
 
     void saveGroup(ProductGroupEntity groupEntity);

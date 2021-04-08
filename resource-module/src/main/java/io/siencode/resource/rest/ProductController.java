@@ -32,6 +32,16 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/product/{id}")
+    public List<ProductEntity> getProductByGroup(@PathVariable Long id) {
+        List<ProductEntity> productList = productService.findAllProductsByGroupId(id);
+        if (productList == null || productList.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("No product added with group %d", id ));
+        } else {
+            return productList;
+        }
+    }
+
     @GetMapping("/group")
     public List<ProductGroupEntity> getGroup() {
         List<ProductGroupEntity> productGroup = productService.findAllGroups();
