@@ -15,3 +15,7 @@ spring:
 server:
   error:
     include-message: always
+
+springdoc:
+  api-docs:
+    enabled: true
