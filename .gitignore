@@ -1,4 +1,4 @@
 .idea/
-resource-module/target/
-authorization-server/target/
 /fooddb.mv.db
+/ordering-module/target/
+/app-infrastructure-module/target/

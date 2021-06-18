@@ -7,7 +7,7 @@ git clone https://github.com/Siencode/Flashcards-Spring-API
 ```
 Run resource module:
 ```
-mvnw spring-boot:run -pl resource-module
+mvnw spring-boot:run -pl app-infrastructure-module
 ```
 
 H2 DB console:
