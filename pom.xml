@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>app-infrastructure-module</module>
+        <module>app-infrastructure</module>
         <module>ordering-module</module>
     </modules>
 
@@ -36,7 +36,7 @@
             </dependency>
             <dependency>
                 <groupId>io.siencode</groupId>
-                <artifactId>app-infrastructure-module</artifactId>
+                <artifactId>app-infrastructure</artifactId>
             </dependency>
             <dependency>
                 <groupId>org.javamoney</groupId>

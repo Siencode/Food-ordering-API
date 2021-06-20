@@ -2,12 +2,16 @@ package io.siencode.infrastructure.user.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.siencode.infrastructure.user.model.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -23,11 +27,17 @@ public class UserEntity implements UserDetails {
     String description;
     @ManyToOne
     @JoinColumn (name = "UserRole_ID", referencedColumnName = "id")
-    UserRoleEntity roleEntity;
+    UserRoleEntity role;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public List<GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        role.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.toString())));
+        return authorities;
+    }
+
+    public void grantAuthority(UserRoleEntity userRole) {
+        role = userRole;
     }
 
     @Override

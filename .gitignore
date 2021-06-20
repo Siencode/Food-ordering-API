@@ -1,4 +1,4 @@
 .idea/
 /fooddb.mv.db
 /ordering-module/target/
-/app-infrastructure-module/target/
+/app-infrastructure/target/

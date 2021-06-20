@@ -1,4 +1,4 @@
-package io.siencode.flashcards.config;
+package io.siencode.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

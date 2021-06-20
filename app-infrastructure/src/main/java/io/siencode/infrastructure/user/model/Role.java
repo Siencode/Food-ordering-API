@@ -1,9 +1,9 @@
-package io.siencode.infrastructure.user.domain;
+package io.siencode.infrastructure.user.model;
 
 
 import java.util.Optional;
 
-public enum UserRole {
+public enum Role {
 
     PRODUCT_MODIFICATION,
     PRODUCT_GROUP_MODIFICATION,
@@ -13,10 +13,10 @@ public enum UserRole {
     SCHEDULE_MODIFICATION,
     SHIFT_MODIFICATION;
 
-    public static Optional<UserRole> getUserRoleById(final int id) {
+    public static Optional<Role> getUserRoleById(final int id) {
         try {
-            final UserRole userRole = UserRole.values()[id];
-            return Optional.of(userRole);
+            final Role role = Role.values()[id];
+            return Optional.of(role);
         } catch (ArrayIndexOutOfBoundsException e) {
             return Optional.empty();
         }
