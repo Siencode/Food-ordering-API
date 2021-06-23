@@ -7,6 +7,7 @@ import io.siencode.infrastructure.user.model.UserRoleModel;
 import io.siencode.infrastructure.user.service.UserRoleService;
 import io.siencode.infrastructure.user.service.UserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -32,6 +33,8 @@ public class UserController {
         return principal.getName();
     }
 
+
+    @PreAuthorize("hasAnyRole('USER_MODIFICATION')")//FIXME
     @PostMapping("/register")
     public void userRegister(@Valid @RequestBody UserModel userModel) {
         if (userService.userIsExist(userModel.getUsername())) {
@@ -41,16 +44,19 @@ public class UserController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('USER_MODIFICATION')")
     @PostMapping("/userRole")
     public void addUserRole(@Valid @RequestBody UserRoleModel userRoleModel) {
         userRoleService.saveUserRole(userRoleModel);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/userRole/{id}")
     public UserRoleEntity getUserRoleById(@PathVariable Long id) {
         return userRoleService.getUserRoles(id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/roles")
     public Role[] getRoles() {
         return Role.values();

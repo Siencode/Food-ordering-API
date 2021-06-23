@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,7 +13,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserRoleEntity {
 
-    public UserRoleEntity(String name, Set<Role> roles) {
+
+    public UserRoleEntity(String name, List<Role> roles) {
         this.name = name;
         this.roles = roles;
     }
@@ -22,11 +23,13 @@ public class UserRoleEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String name;
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles;
 
-    public void addRole(Role role) {
-        roles.add(role);
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    private List<Role> roles;
+
+    @Override
+    public String toString() {
+        return "UserRoleEntity";
     }
 }

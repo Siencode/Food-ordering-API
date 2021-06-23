@@ -11,4 +11,7 @@ public interface UserRoleRepository {
     void delete(long id);
 
     Optional<UserRoleEntity> getById(long id);
+
+    Optional<UserRoleEntity> getByName(String name);
+
 }

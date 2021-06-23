@@ -31,7 +31,8 @@ public class UserService {
         UserEntity user = new UserEntity();
         user.setUsername(userModel.getUsername());
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        user.grantAuthority(userRoleRepository.getById(userModel.getUserRoleId()).orElseGet(UserRoleEntity::new));
+        UserRoleEntity userRole = userRoleRepository.getById(userModel.getUserRoleId()).get();
+        user.grantAuthority(userRole.getRoles());
         try {
             userRepository.add(user);
         } catch (Exception exception) {
@@ -42,21 +43,5 @@ public class UserService {
     public Boolean userIsExist(String username) {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         return userOptional.isPresent();
-    }
-
-    public UserEntity getAuthorizedUser() {
-        Authentication authenticator = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authenticator.getName();
-        Optional<UserEntity> userOptional = userRepository.findByUsername(userName);
-        if (userOptional.isPresent()) {
-            return userOptional.get();
-        } else {
-            throw new RuntimeException(userName + " not found");
-        }
-    }
-
-    public UserEntity getUserByUsername(String userName) {
-        Optional<UserEntity> userOptional = userRepository.findByUsername(userName);
-        return userOptional.orElse(null);
     }
 }

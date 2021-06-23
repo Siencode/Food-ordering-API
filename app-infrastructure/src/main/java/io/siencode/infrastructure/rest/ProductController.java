@@ -5,6 +5,7 @@ import io.siencode.infrastructure.product.domain.ProductGroupEntity;
 import io.siencode.infrastructure.product.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,6 +23,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/product")
     public List<ProductEntity> getProduct() {
         List<ProductEntity> productList = productService.findAllProducts();
@@ -32,6 +34,7 @@ public class ProductController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/product/{id}")
     public List<ProductEntity> getProductByGroup(@PathVariable Long id) {
         List<ProductEntity> productList = productService.findAllProductsByGroupId(id);
@@ -42,6 +45,7 @@ public class ProductController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/group")
     public List<ProductGroupEntity> getGroup() {
         List<ProductGroupEntity> productGroup = productService.findAllGroups();
@@ -52,21 +56,25 @@ public class ProductController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('PRODUCT_MODIFICATION')")
     @PostMapping("/product")
     public void saveProduct(@RequestBody ProductEntity productEntity) {
         productService.saveProduct(productEntity);
     }
 
+    @PreAuthorize("hasAnyRole('PRODUCT_GROUP_MODIFICATION')")
     @PostMapping("/group")
     public void saveGroup(@RequestBody ProductGroupEntity groupEntity) {
         productService.saveGroup(groupEntity);
     }
 
+    @PreAuthorize("hasAnyRole('PRODUCT_MODIFICATION')")
     @DeleteMapping("/product/{id}")
     public void deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
     }
 
+    @PreAuthorize("hasAnyRole('PRODUCT_GROUP_MODIFICATION')")
     @DeleteMapping("/group/{id}")
     public void deleteGroup(@PathVariable Long id) {
         productService.deleteGroupById(id);

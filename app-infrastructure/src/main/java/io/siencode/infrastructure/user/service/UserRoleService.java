@@ -20,11 +20,11 @@ public class UserRoleService {
 
     public void saveUserRole(UserRoleModel userRoleModel) {
         final String userRoleName = userRoleModel.getName();
-        Set<Role> roleList = userRoleModel.getRolesId().stream()
+        List<Role> roleList = userRoleModel.getRolesId().stream()
                 .filter(id -> Role.getUserRoleById(id).isPresent())
                 .map(Role::getUserRoleById)
-                .map(role -> role.get())
-                .collect(Collectors.toSet());
+                .map(Optional::get)
+                .collect(Collectors.toList());
         userRoleRepository.add(new UserRoleEntity(userRoleName, roleList));
     }
 

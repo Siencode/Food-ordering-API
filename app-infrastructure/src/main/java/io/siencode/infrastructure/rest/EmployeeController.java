@@ -7,6 +7,7 @@ import io.siencode.infrastructure.employee.domain.ShiftEntity;
 import io.siencode.infrastructure.employee.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,6 +26,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/employee")
     public List<EmployeeEntity> getProduct() {
         List<EmployeeEntity> productList = employeeService.findAllEmployees();
@@ -35,6 +37,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/role")
     public List<EmployeeRoleEntity> getRole() {
         List<EmployeeRoleEntity> roleList = employeeService.findAllRoles();
@@ -46,26 +49,31 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('EMPLOYEE_MODIFICATION')")
     @PostMapping("/employee")
     public void saveProduct(@RequestBody EmployeeEntity employeeEntity) {
         employeeService.saveEmployee(employeeEntity);
     }
 
+    @PreAuthorize("hasAnyRole('EMPLOYEE_ROLE_MODIFICATION')")
     @PostMapping("/role")
     public void saveGroup(@RequestBody EmployeeRoleEntity employeeRoleEntity) {
         employeeService.saveRole(employeeRoleEntity);
     }
 
+    @PreAuthorize("hasAnyRole('EMPLOYEE_MODIFICATION')")
     @DeleteMapping("/employee/{id}")
     public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployeeById(id);
     }
 
+    @PreAuthorize("hasAnyRole('EMPLOYEE_ROLE_MODIFICATION')")
     @DeleteMapping("/role/{id}")
     public void deleteRole(@PathVariable Long id) {
         employeeService.deleteRoleById(id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/schedule")
     public List<ScheduleEntity> getSchedule() {
         List<ScheduleEntity> getSchedule = employeeService.findAllSchedules();
@@ -76,6 +84,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/shift")
     public List<ShiftEntity> getShift() {
         List<ShiftEntity> getShift = employeeService.findAllShifts();
@@ -86,6 +95,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/schedule/{year}/{month}/{id}")
     public List<ScheduleEntity> getScheduleByMonth(@PathVariable int year, @PathVariable int month, @PathVariable Long id) {
         LocalDate localDate = LocalDate.of(year, month, 1);
@@ -98,6 +108,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/schedule/{year}/{month}")
     public List<ScheduleEntity> getScheduleByMonth(@PathVariable int year, @PathVariable int month) {
         LocalDate localDate = LocalDate.of(year, month, 1);
@@ -110,21 +121,25 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('SCHEDULE_MODIFICATION')")
     @PostMapping("/schedule")
     public void saveSchedule(@RequestBody ScheduleEntity scheduleEntity) {
         employeeService.saveSchedule(scheduleEntity);
     }
 
+    @PreAuthorize("hasAnyRole('SHIFT_MODIFICATION')")
     @PostMapping("/shift")
     public void saveShift(@RequestBody ShiftEntity shiftEntity) {
         employeeService.saveShift(shiftEntity);
     }
 
+    @PreAuthorize("hasAnyRole('SCHEDULE_MODIFICATION')")
     @DeleteMapping("/schedule/{id}")
     public void deleteSchedule(@PathVariable Long id) {
         employeeService.deleteScheduleById(id);
     }
 
+    @PreAuthorize("hasAnyRole('SHIFT_MODIFICATION')")
     @DeleteMapping("/shift/{id}")
     public void deleteShift(@PathVariable Long id) {
         employeeService.deleteShiftById(id);

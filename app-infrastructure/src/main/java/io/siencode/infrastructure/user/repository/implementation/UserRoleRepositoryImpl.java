@@ -30,4 +30,9 @@ public class UserRoleRepositoryImpl implements UserRoleRepository {
     public Optional<UserRoleEntity> getById(long id) {
         return dao.findById(id);
     }
+
+    @Override
+    public Optional<UserRoleEntity> getByName(String name) {
+        return dao.findByName(name);
+    }
 }
